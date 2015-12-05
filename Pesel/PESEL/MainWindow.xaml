@@ -1,0 +1,68 @@
+﻿<Window x:Class="PESEL.MainWindow" Icon="logo.ico"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:Model="clr-namespace:PESEL.Model"
+        xmlns:ViewModel="clr-namespace:PESEL.ViewModel"
+        xmlns:Converter="clr-namespace:PESEL.Converters"
+       
+        
+        Title="PESEL (c) 2015 Łukasz Zapała" Height="300" Width="300" ResizeMode="NoResize" Background="White">
+
+    <Window.Resources>
+        <Converter:BoolToBrushConverter x:Key="boolToBrush" ColorFalse="Red" ColorTrue="Green"/>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <ViewModel:ViewModel />
+    </Window.DataContext>
+
+    <StackPanel >
+        <!--Wyświetlane po uruchomieniu programu!-->
+        <StackPanel Height="42" Orientation="Horizontal" Margin="10">
+
+            <TextBlock Margin="10" Width="110" FontSize="18" Text="Podaj PESEL:"  />
+
+            <TextBox x:Name="tbPESEL" Width="120" Margin="10" TextAlignment="Center" FontSize="14" MaxLength="11"
+                     Foreground="{Binding ElementName=bSPRAWDŹ, Path=IsEnabled, Mode=OneWay, Converter={StaticResource boolToBrush}}" />
+        </StackPanel>
+
+        <Button x:Name="bSPRAWDŹ" Content="SPRAWDŹ" Margin="100,10,100,10" 
+                Command="{Binding ChangeCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=tbPESEL, Path=Text}"  />
+
+        <StackPanel>
+            <!--ROK URODZENIA-->
+            <StackPanel Height="35" Orientation="Horizontal" Margin="10,0">
+
+                <TextBlock Margin="10" Width="110" Height="20" TextWrapping="Wrap" Text="Rok Urodzenia:" />
+
+                <TextBlock Margin="10" Width="80" Height="20" Text="{Binding Year, Mode=OneWay}" />
+
+            </StackPanel>
+            <!--MIESIĄC URODZENIA-->
+            <StackPanel Height="35" Orientation="Horizontal" Margin="10,0">
+
+                <TextBlock Margin="10" Width="110" Height="20" TextWrapping="Wrap" Text="Miesiąc Urodzenia:" />
+
+                <TextBlock Margin="10" Width="80" Height="20" Text="{Binding Month, Mode=OneWay}" />
+
+            </StackPanel>
+            <!--DZIEŃ URODZENIA-->
+            <StackPanel Height="35" Orientation="Horizontal" Margin="10,0">
+
+                <TextBlock Margin="10" Width="110" Height="20" TextWrapping="Wrap" Text="Dzień Urodzenia:" />
+
+                <TextBlock Margin="10" Width="80" Height="20" Text="{Binding Day, Mode=OneWay}" />
+
+            </StackPanel>
+            <!--PŁEĆ URODZENIA-->
+            <StackPanel Height="35" Orientation="Horizontal" Margin="10,0">
+
+                <TextBlock Margin="10" Width="110" Height="20" TextWrapping="Wrap" Text="Płeć:" />
+
+                <TextBlock Margin="10" Width="80" Height="20" Text="{Binding Sex, Mode=OneWay}" />
+
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Window>
